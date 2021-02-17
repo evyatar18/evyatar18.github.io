@@ -12,7 +12,7 @@
   const dump = document.getElementById('dump');
 
   const constraints = {
-    video: true,
+    video: { facingMode: { exact: "environment" } },
   };
 
   captureButton.addEventListener('click', () => {
