@@ -1,6 +1,7 @@
 <video id="player" controls autoplay></video>
 <button id="capture">Capture</button>
 <canvas id="canvas" width=320 height=240></canvas>
+<button click="toggle()">toggle</button>
 
 <p id="dump">
 </p>
@@ -11,21 +12,27 @@
   const captureButton = document.getElementById('capture');
   const dump = document.getElementById('dump');
 
-  const constraints = {
-    video: { facingMode: { exact: "environment" } },
-  };
+  
 
   captureButton.addEventListener('click', () => {
     // Draw the video frame to the canvas.
     context.drawImage(player, 0, 0, canvas.width, canvas.height);
   });
   
-  
-
-  // Attach the video stream to the video element and autoplay.
-  navigator.mediaDevices.getUserMedia(constraints)
+  var env = false;
+  function toggle() {
+    const vid = env ? true : { facingMode: { exact: "environment" } };
+    const constraints = {
+      video: vid,
+    };
+    
+     // Attach the video stream to the video element and autoplay.
+    navigator.mediaDevices.getUserMedia(constraints)
     .then((stream) => {
       player.srcObject = stream;
       dump.innerText = stream;
     });
+  }
+  
+  toggle();
 </script>
