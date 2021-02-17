@@ -30,7 +30,7 @@
     navigator.mediaDevices.getUserMedia(constraints)
     .then((stream) => {
       player.srcObject = stream;
-      dump.innerText = mediaStream.getVideoTracks().length;
+      dump.innerText = stream.getVideoTracks().length;
     });
   }
   
